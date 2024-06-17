@@ -23,6 +23,25 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+
+    /*
+    as of writing here is what my `brew list` gives me. Basically everything I have installed.
+    ==> Formulae
+    aspell          fnm             htop            libksba         libuv           neovim          pinentry        tree-sitter
+    bat             fzf             jq              libnghttp2      libvterm        nettle          pkg-config      unbound
+    bdw-gc          gettext         libassuan       libtasn1        luajit          npth            readline        unibilium
+    bun             gmp             libevent        libtermkey      luv             oniguruma       ripgrep         utf8proc
+    ca-certificates gnupg           libgcrypt       libtool         m4              openssl@1.1     stripe
+    fd              gnutls          libgpg-error    libunistring    msgpack         p11-kit         tmux
+    fish            guile           libidn2         libusb          ncurses         pcre2           tree
+
+    ==> Casks
+    alacritty               font-cascadia-code      mochi                   slack
+    discord                 font-ibm-plex           obs                     telegram
+    emacs                   insomnia                rectangle               vip-access
+    */
+
+
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     pkgs.hello
@@ -31,6 +50,12 @@
 
     pkgs.git
     # pkgs.pgadmin4 - was just trying to see if I can get pgadmin
+
+    # packages to add: alacritty, tree, 
+
+
+
+
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -66,12 +91,21 @@
     # this should edit my .gitconfig
     ".gitconfig".source = dotfiles/.gitconfig;
 
+    ".alacritty.toml".source = dotfiles/.alacritty.toml;
+
     # fish configs
     ".config/fish/fish_variables".source = dotfiles/fish/fish_variables;
 
     ".config/fish/functions".source = dotfiles/fish/functions;
 
 
+
+
+    # TODO: this is a bit of a chicken and egg problem right now.
+    # I need to have experimental features enabled, but they're enabled
+    # by the nix.conf and I need those to run home-manager switch
+    # nix config
+    # ".config/nix/nix.conf".source = dotfiles/nix/nix.conf;
 
   };
 
@@ -111,36 +145,6 @@
     };
 
   };
-
-
-# remove this potentially
-#  programs.git = {
-#    enable = true; # enable git to be managed by home-manager / nix
-#    includes = [
-#      { path = "~/.gitlocalconfig"; }
-#    ];
-#
-#    aliases = {
-#      co = "checkout";
-#      cb = "checkout -b";
-#      p = "push";
-#      s = "status";
-#    };
-#
-#    # userEmail = "cocicsasa@gmail.com";
-#    userEmail = "cocicsasa@gmail.com";
-#    userName = "sasa cocic";
-#    
-#    extraConfig = {
-#      core = {
-#        editor = "vim";
-#      };
-#      credential = {
-#        helper = "store";
-#      };
-#    };
-#
-#  };
 
 
 }
