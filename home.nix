@@ -53,7 +53,8 @@
 
     # packages to add: alacritty, tree, 
 
-
+    # TODO: switch over emacs config so home manager can manage it
+    pkgs.emacs # there seem to be some issues with my setup and using emacs from nix, but maybe it was just the fact I was probably using a different version of emacs?
 
 
 
