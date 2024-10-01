@@ -1,7 +1,3 @@
-
-
-
-
 # TODO: properly write the readme 
 
 

@@ -8,5 +8,6 @@
 	cb = checkout -b
 	p = push
 	s = status
+	pf = push --force-with-lease
 [core]
         editor = vim

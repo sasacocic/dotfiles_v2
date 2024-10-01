@@ -6,3 +6,86 @@ action = "CreateNewWindow"
 key = "N"
 mods = "Command"
 
+
+[window]
+opacity = 0.80
+decorations = "Transparent"
+blur = true
+dynamic_padding = true
+padding = { x = 0, y = 20 }
+
+
+## tokyo-night-storm ##
+
+# Colors (Tokyo Night Storm variant)
+# Source https//github.com/zatchheems/tokyo-night-alacritty-theme
+
+# Default colors
+[colors.primary]
+background = '#24283b'
+foreground = '#a9b1d6'
+
+# Normal colors
+[colors.normal]
+black   = '#32344a'
+red     = '#f7768e'
+green   = '#9ece6a'
+yellow  = '#e0af68'
+blue    = '#7aa2f7'
+magenta = '#ad8ee6'
+cyan    = '#449dab'
+white   = '#9699a8'
+
+# Bright colors
+[colors.bright]
+black   = '#444b6a'
+red     = '#ff7a93'
+green   = '#b9f27c'
+yellow  = '#ff9e64'
+blue    = '#7da6ff'
+magenta = '#bb9af7'
+cyan    = '#0db9d7'
+white   = '#acb0d0'
+
+
+## rose-dawn theme ##
+
+# [colors.primary]
+# background = '#faf4ed'
+# foreground = '#575279'
+# 
+# [colors.cursor]
+# text = '#575279'
+# cursor = '#cecacd'
+# 
+# [colors.vi_mode_cursor]
+# text = '#575279'
+# cursor = '#cecacd'
+# 
+# [colors.selection]
+# text = '#575279'
+# background = '#dfdad9'
+# 
+# [colors.normal]
+# black = '#f2e9e1'
+# red = '#b4637a'
+# green = '#286983'
+# yellow = '#ea9d34'
+# blue = '#56949f'
+# magenta = '#907aa9'
+# cyan = '#d7827e'
+# white = '#575279'
+# 
+# [colors.bright]
+# black = '#9893a5'
+# red = '#b4637a'
+# green = '#286983'
+# yellow = '#ea9d34'
+# blue = '#56949f'
+# magenta = '#907aa9'
+# cyan = '#d7827e'
+# white = '#575279'
+# 
+# [colors.hints]
+# start = { foreground = '#797593', background = '#fffaf3' }
+# end = { foreground = '#9893a5', background = '#fffaf3' }

@@ -25,37 +25,62 @@
   home.packages = [
 
     /*
-    as of writing here is what my `brew list` gives me. Basically everything I have installed.
-    ==> Formulae
-    aspell          fnm             htop            libksba         libuv           neovim          pinentry        tree-sitter
-    bat             fzf             jq              libnghttp2      libvterm        nettle          pkg-config      unbound
-    bdw-gc          gettext         libassuan       libtasn1        luajit          npth            readline        unibilium
-    bun             gmp             libevent        libtermkey      luv             oniguruma       ripgrep         utf8proc
-    ca-certificates gnupg           libgcrypt       libtool         m4              openssl@1.1     stripe
-    fd              gnutls          libgpg-error    libunistring    msgpack         p11-kit         tmux
-    fish            guile           libidn2         libusb          ncurses         pcre2           tree
+      as of writing here is what my `brew list` gives me. Basically everything I have installed.
+      ==> Formulae
+      aspell          fnm             htop            libksba         libuv           neovim          pinentry        tree-sitter
+      bat             fzf             jq              libnghttp2      libvterm        nettle          pkg-config      unbound
+      bdw-gc          gettext         libassuan       libtasn1        luajit          npth            readline        unibilium
+      bun             gmp             libevent        libtermkey      luv             oniguruma       ripgrep         utf8proc
+      ca-certificates gnupg           libgcrypt       libtool         m4              openssl@1.1     stripe
+      fd              gnutls          libgpg-error    libunistring    msgpack         p11-kit         tmux
+      fish            guile           libidn2         libusb          ncurses         pcre2           tree
 
-    ==> Casks
-    alacritty               font-cascadia-code      mochi                   slack
-    discord                 font-ibm-plex           obs                     telegram
-    emacs                   insomnia                rectangle               vip-access
+      ==> Casks
+      alacritty               font-cascadia-code      mochi                   slack
+      discord                 font-ibm-plex           obs                     telegram
+      insomnia                rectangle               vip-access
+    */
+
+    /*
+      things I have transitioned
+
+      neovim          
+      bdw-gc          gettext         libassuan       libtasn1        luajit          npth            readline        unibilium
+      bun             gmp             libevent        libtermkey      luv             oniguruma       ripgrep         utf8proc
+      ca-certificates gnupg           libgcrypt       libtool         m4              openssl@1.1     stripe
+      fd              gnutls          libgpg-error    libunistring    msgpack         p11-kit         tmux
+      fish            guile           libidn2         libusb          ncurses         pcre2           tree
+
+      ==> Casks
+      emacs                   rectangle
+
+
     */
 
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
-    pkgs.hello
+    # pkgs.hello
     pkgs.direnv
     pkgs.nix-direnv # I think this will install dir env - idk what the point of doing this is? I guess I can commit this file up then what? I guess if I have nix I should just be able to do nix-shell -p home-manager && home-manager switch and then everything should just be available in my environment right?  
+
+    # actually don't know if I need it, because I have no clue wtf it does. Looks like it just makes it easier to use nix?
+    # pkgs.devenv # similar to direnv and also uses direnv so not sure if I need direnv twice?
 
     pkgs.git
     # pkgs.pgadmin4 - was just trying to see if I can get pgadmin
 
+    pkgs.nil # nix language server
+    pkgs.nixpkgs-fmt # nix formatter
+
     # packages to add: alacritty, tree, 
+    # alacritty will be somewhat problematic on mac since it's not an app. It's a binary. so to open it I'd have to call it from another terminal. 
 
     # TODO: switch over emacs config so home manager can manage it
     pkgs.emacs # there seem to be some issues with my setup and using emacs from nix, but maybe it was just the fact I was probably using a different version of emacs?
 
+
+    pkgs.zoxide
 
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
@@ -70,6 +95,12 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
+
+
+    pkgs.bat
+
+    # https://github.com/nix-community/home-manager/issues/884 <- this is worth checking out because it makes me think using home-manager incorrectly 
+    # pkgs.neovim
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -100,6 +131,10 @@
     ".config/fish/functions".source = dotfiles/fish/functions;
 
 
+    # nvim config - seems to be doing nothing
+    # also no idea why i'm doing this now? any reason?
+    # I was having trouble with lazy vim because of this pretty sure. So I'm commenting it for now
+    #".config/nvim".source = dotfiles/nvim;
 
 
     # TODO: this is a bit of a chicken and egg problem right now.
@@ -138,6 +173,9 @@
   # idk what I'm going here I just copied this from 
   programs = {
     fish.enable = true; # this is default enabled it seems
+    fish.shellAbbrs = {
+      pr = "poetry run";
+    };
     git.enable = true;
     direnv = {
       enable = true;
@@ -145,6 +183,40 @@
       nix-direnv.enable = true;
     };
 
+    zoxide.enable = true;
+    zoxide.enableFishIntegration = true;
+
+	# got this from the vimjoyer video
+    neovim = {
+    	enable = true;
+
+	viAlias = true;
+	vimAlias = true;
+	vimdiffAlias = true;
+
+
+	plugins = [
+		pkgs.vimPlugins.gruvbox-nvim
+		pkgs.vimPlugins.rose-pine
+		pkgs.vimPlugins.telescope-nvim
+		pkgs.vimPlugins.nvim-treesitter.withAllGrammars # should probably reduce this only to things I use?
+		pkgs.vimPlugins.nvim-autopairs
+		pkgs.vimPlugins.nvim-surround # I assume this is like vim-surround just for neovim - but tbh not really sure
+		pkgs.vimPlugins.nvim-lspconfig
+	];
+
+
+	# wtf does this do???? is this init.lua?
+	# '' means multi line string
+	extraLuaConfig = ''
+	${builtins.readFile ./dotfiles/nvim/lsp_stuff.lua}
+	${builtins.readFile ./dotfiles/nvim/options.lua}
+	${builtins.readFile ./dotfiles/nvim/plugin/telescope.lua}
+	${builtins.readFile ./dotfiles/nvim/plugin/nvim-autopairs.lua}
+	${builtins.readFile ./dotfiles/nvim/plugin/nvim-surround.lua}
+
+	'';
+    };
   };
 
 
