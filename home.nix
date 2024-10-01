@@ -98,6 +98,7 @@
 
 
     pkgs.bat
+    pkgs.lua-language-server
 
     # https://github.com/nix-community/home-manager/issues/884 <- this is worth checking out because it makes me think using home-manager incorrectly 
     # pkgs.neovim
