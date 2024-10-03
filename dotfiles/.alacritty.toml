@@ -8,7 +8,7 @@ mods = "Command"
 
 
 [window]
-opacity = 0.80
+opacity = 0.86
 decorations = "Transparent"
 blur = true
 dynamic_padding = true
