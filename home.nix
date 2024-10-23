@@ -203,7 +203,12 @@
 		pkgs.vimPlugins.nvim-treesitter.withAllGrammars # should probably reduce this only to things I use?
 		pkgs.vimPlugins.nvim-autopairs
 		pkgs.vimPlugins.nvim-surround # I assume this is like vim-surround just for neovim - but tbh not really sure
+		pkgs.vimPlugins.oil-nvim
 		pkgs.vimPlugins.nvim-lspconfig
+		pkgs.vimPlugins.nvim-cmp
+		pkgs.vimPlugins.cmp-nvim-lsp # LSP source for nvim-cmp
+		pkgs.vimPlugins.cmp_luasnip # Snippets source for nvim-cmp
+		pkgs.vimPlugins.luasnip # Snippets plugin
 	];
 
 
@@ -215,8 +220,11 @@
 	${builtins.readFile ./dotfiles/nvim/plugin/telescope.lua}
 	${builtins.readFile ./dotfiles/nvim/plugin/nvim-autopairs.lua}
 	${builtins.readFile ./dotfiles/nvim/plugin/nvim-surround.lua}
+	${builtins.readFile ./dotfiles/nvim/plugin/oil-nvim.lua}
+	${builtins.readFile ./dotfiles/nvim/plugin/nvim-cmp.lua}
 
 	'';
+
     };
   };
 
