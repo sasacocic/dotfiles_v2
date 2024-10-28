@@ -1,5 +1,6 @@
 [font]
-size = 12
+size = 16
+normal = { family = "IBM Plex Mono", style = "Regular" }
 
 [[keyboard.bindings]]
 action = "CreateNewWindow"
@@ -14,9 +15,6 @@ dynamic_padding = true
 padding = { x = 0, y = 0 }
 
 
-
-
-
 ## rose-pine ## 
 
 [colors.primary]
@@ -25,7 +23,7 @@ foreground = '#e0def4'
 
 [colors.cursor]
 text = '#e0def4'
-cursor = '#524f67'
+cursor = '#524f67' # having issues with this
 
 [colors.vi_mode_cursor]
 text = '#e0def4'

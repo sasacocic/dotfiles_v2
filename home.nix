@@ -198,9 +198,13 @@
 
 	plugins = [
 		pkgs.vimPlugins.gruvbox-nvim
+		pkgs.vimPlugins.catppuccin-nvim
+		pkgs.vimPlugins.kanagawa-nvim
 		pkgs.vimPlugins.rose-pine
+		# above are themes
 		pkgs.vimPlugins.telescope-nvim
 		pkgs.vimPlugins.nvim-treesitter.withAllGrammars # should probably reduce this only to things I use?
+		pkgs.vimPlugins.nvim-treesitter-context# should probably reduce this only to things I use?
 		pkgs.vimPlugins.nvim-autopairs
 		pkgs.vimPlugins.nvim-surround # I assume this is like vim-surround just for neovim - but tbh not really sure
 		pkgs.vimPlugins.oil-nvim
@@ -209,19 +213,22 @@
 		pkgs.vimPlugins.cmp-nvim-lsp # LSP source for nvim-cmp
 		pkgs.vimPlugins.cmp_luasnip # Snippets source for nvim-cmp
 		pkgs.vimPlugins.luasnip # Snippets plugin
+		pkgs.vimPlugins.conform-nvim
 	];
 
 
 	# wtf does this do???? is this init.lua?
 	# '' means multi line string
 	extraLuaConfig = ''
-	${builtins.readFile ./dotfiles/nvim/lsp_stuff.lua}
 	${builtins.readFile ./dotfiles/nvim/options.lua}
 	${builtins.readFile ./dotfiles/nvim/plugin/telescope.lua}
 	${builtins.readFile ./dotfiles/nvim/plugin/nvim-autopairs.lua}
 	${builtins.readFile ./dotfiles/nvim/plugin/nvim-surround.lua}
 	${builtins.readFile ./dotfiles/nvim/plugin/oil-nvim.lua}
 	${builtins.readFile ./dotfiles/nvim/plugin/nvim-cmp.lua}
+	${builtins.readFile ./dotfiles/nvim/plugin/treesitter.lua}
+	${builtins.readFile ./dotfiles/nvim/plugin/conform.lua}
+	${builtins.readFile ./dotfiles/nvim/lsp_stuff.lua}
 
 	'';
 
