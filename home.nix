@@ -80,9 +80,6 @@
     pkgs.emacs # there seem to be some issues with my setup and using emacs from nix, but maybe it was just the fact I was probably using a different version of emacs?
 
 
-    pkgs.zoxide
-
-
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -131,6 +128,7 @@
 
     ".config/fish/functions".source = dotfiles/fish/functions;
 
+    ".tmux.conf".source = dotfiles/.tmux.conf;
 
     # nvim config - seems to be doing nothing
     # also no idea why i'm doing this now? any reason?
@@ -187,52 +185,58 @@
     zoxide.enable = true;
     zoxide.enableFishIntegration = true;
 
-	# got this from the vimjoyer video
-    neovim = {
-    	enable = true;
-
-	viAlias = true;
-	vimAlias = true;
-	vimdiffAlias = true;
-
-
-	plugins = [
-		pkgs.vimPlugins.gruvbox-nvim
-		pkgs.vimPlugins.catppuccin-nvim
-		pkgs.vimPlugins.kanagawa-nvim
-		pkgs.vimPlugins.rose-pine
-		# above are themes
-		pkgs.vimPlugins.telescope-nvim
-		pkgs.vimPlugins.nvim-treesitter.withAllGrammars # should probably reduce this only to things I use?
-		pkgs.vimPlugins.nvim-treesitter-context# should probably reduce this only to things I use?
-		pkgs.vimPlugins.nvim-autopairs
-		pkgs.vimPlugins.nvim-surround # I assume this is like vim-surround just for neovim - but tbh not really sure
-		pkgs.vimPlugins.oil-nvim
-		pkgs.vimPlugins.nvim-lspconfig
-		pkgs.vimPlugins.nvim-cmp
-		pkgs.vimPlugins.cmp-nvim-lsp # LSP source for nvim-cmp
-		pkgs.vimPlugins.cmp_luasnip # Snippets source for nvim-cmp
-		pkgs.vimPlugins.luasnip # Snippets plugin
-		pkgs.vimPlugins.conform-nvim
-	];
-
-
-	# wtf does this do???? is this init.lua?
-	# '' means multi line string
-	extraLuaConfig = ''
-	${builtins.readFile ./dotfiles/nvim/options.lua}
-	${builtins.readFile ./dotfiles/nvim/plugin/telescope.lua}
-	${builtins.readFile ./dotfiles/nvim/plugin/nvim-autopairs.lua}
-	${builtins.readFile ./dotfiles/nvim/plugin/nvim-surround.lua}
-	${builtins.readFile ./dotfiles/nvim/plugin/oil-nvim.lua}
-	${builtins.readFile ./dotfiles/nvim/plugin/nvim-cmp.lua}
-	${builtins.readFile ./dotfiles/nvim/plugin/treesitter.lua}
-	${builtins.readFile ./dotfiles/nvim/plugin/conform.lua}
-	${builtins.readFile ./dotfiles/nvim/lsp_stuff.lua}
-
-	'';
+    tmux = {
+        enable = true;
+        escapeTime = 10;
+        terminal = "screen-256color";
 
     };
+
+	# got this from the vimjoyer video
+    neovim = {
+        enable = true;
+
+        viAlias = true;
+        vimAlias = true;
+        vimdiffAlias = true;
+
+
+        plugins = [
+            pkgs.vimPlugins.gruvbox-nvim
+            pkgs.vimPlugins.catppuccin-nvim
+            pkgs.vimPlugins.kanagawa-nvim
+            pkgs.vimPlugins.rose-pine
+            # above are themes
+            pkgs.vimPlugins.telescope-nvim
+            pkgs.vimPlugins.nvim-treesitter.withAllGrammars # should probably reduce this only to things I use?
+            pkgs.vimPlugins.nvim-treesitter-context# should probably reduce this only to things I use?
+            pkgs.vimPlugins.nvim-autopairs
+            pkgs.vimPlugins.nvim-surround # I assume this is like vim-surround just for neovim - but tbh not really sure
+            pkgs.vimPlugins.oil-nvim
+            pkgs.vimPlugins.nvim-lspconfig
+            pkgs.vimPlugins.nvim-cmp
+            pkgs.vimPlugins.cmp-nvim-lsp # LSP source for nvim-cmp
+            pkgs.vimPlugins.cmp_luasnip # Snippets source for nvim-cmp
+            pkgs.vimPlugins.luasnip # Snippets plugin
+            pkgs.vimPlugins.conform-nvim
+        ];
+
+
+        # wtf does this do???? is this init.lua?
+        # '' means multi line string
+        extraLuaConfig = ''
+        ${builtins.readFile ./dotfiles/nvim/options.lua}
+        ${builtins.readFile ./dotfiles/nvim/plugin/telescope.lua}
+        ${builtins.readFile ./dotfiles/nvim/plugin/nvim-autopairs.lua}
+        ${builtins.readFile ./dotfiles/nvim/plugin/nvim-surround.lua}
+        ${builtins.readFile ./dotfiles/nvim/plugin/oil-nvim.lua}
+        ${builtins.readFile ./dotfiles/nvim/plugin/nvim-cmp.lua}
+        ${builtins.readFile ./dotfiles/nvim/plugin/treesitter.lua}
+        ${builtins.readFile ./dotfiles/nvim/plugin/treesitter-context.lua}
+        ${builtins.readFile ./dotfiles/nvim/plugin/conform.lua}
+        ${builtins.readFile ./dotfiles/nvim/lsp_stuff.lua}
+        '';
+        };
   };
 
 

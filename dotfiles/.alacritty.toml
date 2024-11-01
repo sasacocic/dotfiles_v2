@@ -1,6 +1,10 @@
 [font]
-size = 16
+size = 15
 normal = { family = "IBM Plex Mono", style = "Regular" }
+
+
+[env]
+term = "xterm-256color"
 
 [[keyboard.bindings]]
 action = "CreateNewWindow"

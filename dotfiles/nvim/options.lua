@@ -1,7 +1,16 @@
+
+vim.o.termguicolors = true
+vim.cmd.colorscheme('gruvbox')
+
 -- view :help lua-guide to actually understand this lua code
 vim.g.mapleader = " "
 
 -- TODO: figure out the difference between vim.o and vim.opt
+
+
+-- I just copied this - no idea about it - but allegedly makes my cursor blink
+vim.opt.guicursor = "n-v-c:block-Cursor"
+vim.opt.guicursor:append("i:ver25-Cursor/lCursor-blinkwait300-blinkoff200-blinkon200")
 
 
 -- show line number currently on in gutter
@@ -48,10 +57,12 @@ vim.schedule(function()
     vim.opt.clipboard = 'unnamedplus'
 end)
 
-vim.cmd.colorscheme('catppuccin-latte')
 
 -- [[ key maps ]] --
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+vim.keymap.set('n', '<leader><Tab>', '<C-^>')
+
 
 -- what keymap do I want? Well I want gd instead of <C-]> to be my go to definition
 
