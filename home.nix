@@ -191,8 +191,7 @@
         terminal = "screen-256color";
 
     };
-
-	# got this from the vimjoyer video
+    # got this from the vimjoyer video
     neovim = {
         enable = true;
 
@@ -219,6 +218,7 @@
             pkgs.vimPlugins.cmp_luasnip # Snippets source for nvim-cmp
             pkgs.vimPlugins.luasnip # Snippets plugin
             pkgs.vimPlugins.conform-nvim
+            pkgs.vimPlugins.indent-blankline-nvim # indentation guides
         ];
 
 
@@ -234,10 +234,9 @@
         ${builtins.readFile ./dotfiles/nvim/plugin/treesitter.lua}
         ${builtins.readFile ./dotfiles/nvim/plugin/treesitter-context.lua}
         ${builtins.readFile ./dotfiles/nvim/plugin/conform.lua}
+        ${builtins.readFile ./dotfiles/nvim/plugin/indent-blankline.lua}
         ${builtins.readFile ./dotfiles/nvim/lsp_stuff.lua}
         '';
         };
   };
-
-
 }
