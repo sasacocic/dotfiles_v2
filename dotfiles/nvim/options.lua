@@ -1,6 +1,5 @@
-
 vim.o.termguicolors = true
-vim.cmd.colorscheme('gruvbox')
+vim.cmd.colorscheme('catppuccin-frappe')
 
 -- view :help lua-guide to actually understand this lua code
 vim.g.mapleader = " "
@@ -35,7 +34,7 @@ vim.opt.tabstop = 4
 vim.opt.scrolloff = 1500
 
 -- turns of line wrapping
-vim.opt.wrap = false 
+vim.opt.wrap = false
 
 vim.opt.mouse = 'a'
 

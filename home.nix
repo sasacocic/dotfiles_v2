@@ -1,15 +1,13 @@
 { config, pkgs, ... }:
 
 {
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "sasacocic";
   home.homeDirectory = "/Users/sasacocic";
 
-
-
   # targets.genericLinux.enable = true; # vimjoyer was saying to enable this?
-
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -44,7 +42,7 @@
     /*
       things I have transitioned
 
-      neovim          
+      neovim
       bdw-gc          gettext         libassuan       libtasn1        luajit          npth            readline        unibilium
       bun             gmp             libevent        libtermkey      luv             oniguruma       ripgrep         utf8proc
       ca-certificates gnupg           libgcrypt       libtool         m4              openssl@1.1     stripe
@@ -53,16 +51,13 @@
 
       ==> Casks
       emacs                   rectangle
-
-
     */
-
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
     pkgs.direnv
-    pkgs.nix-direnv # I think this will install dir env - idk what the point of doing this is? I guess I can commit this file up then what? I guess if I have nix I should just be able to do nix-shell -p home-manager && home-manager switch and then everything should just be available in my environment right?  
+    pkgs.nix-direnv # I think this will install dir env - idk what the point of doing this is? I guess I can commit this file up then what? I guess if I have nix I should just be able to do nix-shell -p home-manager && home-manager switch and then everything should just be available in my environment right?
 
     # actually don't know if I need it, because I have no clue wtf it does. Looks like it just makes it easier to use nix?
     # pkgs.devenv # similar to direnv and also uses direnv so not sure if I need direnv twice?
@@ -72,13 +67,14 @@
 
     pkgs.nil # nix language server
     pkgs.nixpkgs-fmt # nix formatter
+    pkgs.nixd
+    pkgs.nixfmt-rfc-style
 
     # packages to add: alacritty, tree, 
     # alacritty will be somewhat problematic on mac since it's not an app. It's a binary. so to open it I'd have to call it from another terminal. 
 
     # TODO: switch over emacs config so home manager can manage it
     pkgs.emacs # there seem to be some issues with my setup and using emacs from nix, but maybe it was just the fact I was probably using a different version of emacs?
-
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -92,7 +88,6 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-
 
     pkgs.bat
     pkgs.lua-language-server
@@ -109,14 +104,11 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
-
-
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
-
 
     # this should edit my .gitconfig
     ".gitconfig".source = dotfiles/.gitconfig;
@@ -134,7 +126,6 @@
     # also no idea why i'm doing this now? any reason?
     # I was having trouble with lazy vim because of this pretty sure. So I'm commenting it for now
     #".config/nvim".source = dotfiles/nvim;
-
 
     # TODO: this is a bit of a chicken and egg problem right now.
     # I need to have experimental features enabled, but they're enabled
@@ -167,8 +158,6 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-
-
   # idk what I'm going here I just copied this from 
   programs = {
     fish.enable = true; # this is default enabled it seems
@@ -186,45 +175,45 @@
     zoxide.enableFishIntegration = true;
 
     tmux = {
-        enable = true;
-        escapeTime = 10;
-        terminal = "screen-256color";
-
+      enable = true;
+      escapeTime = 10;
+      terminal = "screen-256color";
+      shell = "${pkgs.fish}/bin/fish";
+      keyMode = "vi";
+      mouse = true;
     };
     # got this from the vimjoyer video
     neovim = {
-        enable = true;
+      enable = true;
 
-        viAlias = true;
-        vimAlias = true;
-        vimdiffAlias = true;
+      viAlias = true;
+      vimAlias = true;
+      vimdiffAlias = true;
 
+      plugins = [
+        pkgs.vimPlugins.gruvbox-nvim
+        pkgs.vimPlugins.catppuccin-nvim
+        pkgs.vimPlugins.kanagawa-nvim
+        pkgs.vimPlugins.rose-pine
+        # above are themes
+        pkgs.vimPlugins.telescope-nvim
+        pkgs.vimPlugins.nvim-treesitter.withAllGrammars # should probably reduce this only to things I use?
+        pkgs.vimPlugins.nvim-treesitter-context # should probably reduce this only to things I use?
+        pkgs.vimPlugins.nvim-autopairs
+        pkgs.vimPlugins.nvim-surround # I assume this is like vim-surround just for neovim - but tbh not really sure
+        pkgs.vimPlugins.oil-nvim
+        pkgs.vimPlugins.nvim-lspconfig
+        pkgs.vimPlugins.nvim-cmp
+        pkgs.vimPlugins.cmp-nvim-lsp # LSP source for nvim-cmp
+        pkgs.vimPlugins.cmp_luasnip # Snippets source for nvim-cmp
+        pkgs.vimPlugins.luasnip # Snippets plugin
+        pkgs.vimPlugins.conform-nvim
+        pkgs.vimPlugins.indent-blankline-nvim # indentation guides
+      ];
 
-        plugins = [
-            pkgs.vimPlugins.gruvbox-nvim
-            pkgs.vimPlugins.catppuccin-nvim
-            pkgs.vimPlugins.kanagawa-nvim
-            pkgs.vimPlugins.rose-pine
-            # above are themes
-            pkgs.vimPlugins.telescope-nvim
-            pkgs.vimPlugins.nvim-treesitter.withAllGrammars # should probably reduce this only to things I use?
-            pkgs.vimPlugins.nvim-treesitter-context# should probably reduce this only to things I use?
-            pkgs.vimPlugins.nvim-autopairs
-            pkgs.vimPlugins.nvim-surround # I assume this is like vim-surround just for neovim - but tbh not really sure
-            pkgs.vimPlugins.oil-nvim
-            pkgs.vimPlugins.nvim-lspconfig
-            pkgs.vimPlugins.nvim-cmp
-            pkgs.vimPlugins.cmp-nvim-lsp # LSP source for nvim-cmp
-            pkgs.vimPlugins.cmp_luasnip # Snippets source for nvim-cmp
-            pkgs.vimPlugins.luasnip # Snippets plugin
-            pkgs.vimPlugins.conform-nvim
-            pkgs.vimPlugins.indent-blankline-nvim # indentation guides
-        ];
-
-
-        # wtf does this do???? is this init.lua?
-        # '' means multi line string
-        extraLuaConfig = ''
+      # wtf does this do???? is this init.lua?
+      # '' means multi line string
+      extraLuaConfig = ''
         ${builtins.readFile ./dotfiles/nvim/options.lua}
         ${builtins.readFile ./dotfiles/nvim/plugin/telescope.lua}
         ${builtins.readFile ./dotfiles/nvim/plugin/nvim-autopairs.lua}
@@ -236,7 +225,7 @@
         ${builtins.readFile ./dotfiles/nvim/plugin/conform.lua}
         ${builtins.readFile ./dotfiles/nvim/plugin/indent-blankline.lua}
         ${builtins.readFile ./dotfiles/nvim/lsp_stuff.lua}
-        '';
-        };
+      '';
+    };
   };
 }
