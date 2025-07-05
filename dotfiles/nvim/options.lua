@@ -51,6 +51,7 @@ vim.o.undofile = true
 
 vim.opt.updatetime = 250
 
+
 -- makes OS clipboard and vim clipboard the same
 vim.schedule(function()
     vim.opt.clipboard = 'unnamedplus'
@@ -59,6 +60,7 @@ end)
 
 -- [[ key maps ]] --
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 
 vim.keymap.set('n', '<leader><Tab>', '<C-^>')
 

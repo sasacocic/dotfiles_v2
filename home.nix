@@ -21,7 +21,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-
     /*
       as of writing here is what my `brew list` gives me. Basically everything I have installed.
       ==> Formulae
@@ -69,6 +68,8 @@
     pkgs.nixpkgs-fmt # nix formatter
     pkgs.nixd
     pkgs.nixfmt-rfc-style
+    pkgs.awscli2
+    pkgs.colima
 
     # packages to add: alacritty, tree, 
     # alacritty will be somewhat problematic on mac since it's not an app. It's a binary. so to open it I'd have to call it from another terminal. 
@@ -94,6 +95,8 @@
 
     # https://github.com/nix-community/home-manager/issues/884 <- this is worth checking out because it makes me think using home-manager incorrectly 
     # pkgs.neovim
+
+    pkgs.vscode-langservers-extracted
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -119,8 +122,6 @@
     ".config/fish/fish_variables".source = dotfiles/fish/fish_variables;
 
     ".config/fish/functions".source = dotfiles/fish/functions;
-
-    ".tmux.conf".source = dotfiles/.tmux.conf;
 
     # nvim config - seems to be doing nothing
     # also no idea why i'm doing this now? any reason?
@@ -181,6 +182,13 @@
       shell = "${pkgs.fish}/bin/fish";
       keyMode = "vi";
       mouse = true;
+      plugins = [
+        pkgs.tmuxPlugins.resurrect
+      ];
+
+      extraConfig = ''
+        ${builtins.readFile ./dotfiles/.tmux.conf}
+      '';
     };
     # got this from the vimjoyer video
     neovim = {

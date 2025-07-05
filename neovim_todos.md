@@ -4,6 +4,7 @@
 2. Code folding - right now doesn't work
 3. Configure format on save - I kind of have this working, but don't totally understand how it works - I'm assuming it just picks up a formatter if it's installed - or somehow uses LSPs formattin?
 
+
 4. Configure telescope to show ceratin hidden files and not others - probably best way to do this is have it respect .gitignore
 5. cmd + T in vscode lets you do a symbol search - does neovim have something similar?
 6. Have `:e` always create files relative to the current directory i.e.
