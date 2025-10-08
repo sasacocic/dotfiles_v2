@@ -70,9 +70,10 @@
     pkgs.nixfmt-rfc-style
     pkgs.awscli2
     pkgs.colima
+    pkgs.b2sum
 
-    # packages to add: alacritty, tree, 
-    # alacritty will be somewhat problematic on mac since it's not an app. It's a binary. so to open it I'd have to call it from another terminal. 
+    # packages to add: alacritty, tree,
+    # alacritty will be somewhat problematic on mac since it's not an app. It's a binary. so to open it I'd have to call it from another terminal.
 
     # TODO: switch over emacs config so home manager can manage it
     pkgs.emacs # there seem to be some issues with my setup and using emacs from nix, but maybe it was just the fact I was probably using a different version of emacs?
@@ -93,7 +94,7 @@
     pkgs.bat
     pkgs.lua-language-server
 
-    # https://github.com/nix-community/home-manager/issues/884 <- this is worth checking out because it makes me think using home-manager incorrectly 
+    # https://github.com/nix-community/home-manager/issues/884 <- this is worth checking out because it makes me think using home-manager incorrectly
     # pkgs.neovim
 
     pkgs.vscode-langservers-extracted
@@ -159,7 +160,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # idk what I'm going here I just copied this from 
+  # idk what I'm going here I just copied this from
   programs = {
     fish.enable = true; # this is default enabled it seems
     fish.shellAbbrs = {

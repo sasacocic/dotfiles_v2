@@ -3,12 +3,13 @@ local lspconfig = require('lspconfig')
 
 -- I could set these to run on file type, but I think it would mean each time
 -- I open up one of those files then it would run right?
-lspconfig.pyright.setup {}
+-- lspconfig.pyright.setup {}
 lspconfig.gopls.setup {}
 -- lspconfig.clangd.setup{} # doesn't really work - need to figure out why
 lspconfig.lua_ls.setup {}
 lspconfig.nixd.setup {}
 lspconfig.html.setup {}
+vim.lsp.enable('basedpyright')
 
 
 vim.api.nvim_create_autocmd('LspAttach', {
